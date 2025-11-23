@@ -1,0 +1,5 @@
+.cat-runner { z-index: 1000 !important; transition: transform 0.1s linear; }
+.cat-bounce { animation: bounce 0.5s infinite alternate; }
+@keyframes bounce { to { transform: translateY(-4px); } }
+
+.dist-tooltip { background: rgba(255,255,255,0.95); border: 1px solid #8b5cf6; color: #4c1d95; font-weight: bold; padding: 2px 6px; border-radius: 4px; font-size: 11px; }
