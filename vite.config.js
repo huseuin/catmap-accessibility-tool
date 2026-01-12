@@ -1,10 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // ⚡  Yayınlama sırasında dosyaların nerede aranacağını bildirir.
-  base: "/catmap-accessibility-tool/settings/", 
-
+  // Örn: huseyinnmutlu.github.io/catmap-projesi/ ise "/catmap-projesi/" yazmalısın
+  base: "/catmap-accessibility-tool/", 
 })
