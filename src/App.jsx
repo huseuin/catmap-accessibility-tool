@@ -13,6 +13,29 @@ import MapMarkers from "./components/MapNoktaları";
 import RouteRenderer from "./features/rota"; 
 import CatAnimator from "./features/cat";
 
+function SignatureControl({ limit }) {
+  const map = useMap();
+
+  useEffect(() => {
+    // Sol alt köşeye bir kontrol 
+    const info = L.control({ position: "bottomleft" });
+
+    info.onAdd = function () {
+      const div = L.DomUtil.create("div", "custom-signature-panel");
+      div.innerHTML = `
+        <div class="limit-indicator">Mesafe Sınırı: <b>${limit} m</b></div>
+        <div class="signature-text">Developed by <b>Hüseyin</b></div>
+      `;
+      return div;
+    };
+
+    info.addTo(map);
+    return () => info.remove(); 
+  }, [map, limit]);
+
+  return null;
+}
+
 fixLeafletIcons(); 
 const DEFAULT_TILE_URL = MAP_THEMES[0].url;
 export default function App() {
@@ -37,13 +60,12 @@ const [mapTileUrl, setMapTileUrl] = useState(DEFAULT_TILE_URL);
     setStatusText("Hesaplanıyor...");
 
     const isRoad = mode === 'road';
-    const searchR = isRoad ? limit * 2.5 : limit;
+    const searchR = limit;
 
     const candidates = pointsData
         .map(p => ({ ...p, air: L.latLng(latlng).distanceTo([p.lat, p.lng]) }))
         .filter(p => p.air <= searchR)
-        .sort((a,b) => a.air - b.air)
-        .slice(0, 8);
+        .sort((a,b) => a.air - b.air);
 
     if (candidates.length === 0) {
         setLoading(false);
@@ -73,7 +95,7 @@ const [mapTileUrl, setMapTileUrl] = useState(DEFAULT_TILE_URL);
             } catch (err) {
                 console.log("Rota hatası", err);
             }
-            await new Promise(r => setTimeout(r, 100));
+            await new Promise(r => setTimeout(r, 10));
         }
     }
     
@@ -111,11 +133,11 @@ const [mapTileUrl, setMapTileUrl] = useState(DEFAULT_TILE_URL);
         />
 
         <MapContainer center={[36.758, 34.555]} zoom={14} scrollWheelZoom={true} className="h-full w-full">
-    <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-        key={mapTileUrl} 
-        url={mapTileUrl} 
-    />
+   <TileLayer
+    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> |  by <a href="https://www.linkedin.com/in/huseyinnmutlu/" target="_blank">Hüseyin Mutlu</a>'
+    key={mapTileUrl} 
+    url={mapTileUrl} 
+/>
     
     <ScaleControl position="bottomright" metric={true} imperial={false} />
             

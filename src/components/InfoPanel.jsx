@@ -51,7 +51,7 @@ function InfoPanel({ pointsData, routes, mode, setMode, limit, setLimit, categor
                 ))}
             </select>
 
-            {/* Lejant (CATEGORIES artık categories prop'u olarak geliyor) */}
+            {/* Lejant (CATEGORIES prop olarak geliyor) */}
             <div className="border-t pt-2 mb-2 bg-gray-50 p-2 rounded-lg">
                 <div className="legend-item"><span className="dot bg-blue-600 border border-white"></span> Başlangıç</div>
                 {Object.keys(counts).map(cat => (

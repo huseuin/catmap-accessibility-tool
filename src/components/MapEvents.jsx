@@ -3,13 +3,12 @@ import { useMap, useMapEvents } from "react-leaflet";
 import axios from "axios";
 import { processData } from "../services/dataProcessors"; 
 
-// App.jsx'ten gelen props'ları tanımlıyoruz
 function MapEvents({ onMapClick, setPointsData, setLoading, setStatusText }) { 
     const map = useMap();
     
     useMapEvents({
       click(e) {
-        onMapClick(e.latlng); // Tıklama olayını App.jsx'e iletiyoruz
+        onMapClick(e.latlng); 
       }
     });
 
