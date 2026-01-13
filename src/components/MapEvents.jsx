@@ -29,7 +29,7 @@ function MapEvents({ onMapClick, setPointsData, setLoading, setStatusText }) {
             const newPoints = processData(res.data.elements); 
             setPointsData(newPoints); 
         } catch (err) {
-            alert("Veri hatası oluştu.");
+            alert("Veri hatası oluştu, tekrar deneyiniz.");
         } finally {
             setLoading(false);
         }
